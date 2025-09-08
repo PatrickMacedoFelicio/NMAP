@@ -2,6 +2,9 @@
 import socket
 import ipaddress
 
+# Portas mais comuns a serem testadas
+PORTAS_COMUNS = [21, 22, 23, 25, 53, 80, 110, 139, 143, 443, 445, 3389]
+
 def scan_tcp(ip, port):
     """Varredura básica TCP (connect scan)"""
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,16 +35,13 @@ def scan_udp(ip, port):
         sock.close()
 
 def main():
-    print("="*45)
-    print("   Scanner de Portas TCP/UDP - Versão Didática")
-    print("="*45)
+    print("="*50)
+    print("      Scanner de Portas TCP/UDP - Automático")
+    print("="*50)
 
     alvo = input("Digite o IP ou rede (ex: 192.168.0.1 ou 192.168.0.0/24): ").strip()
-    tipo = input("Digite o tipo de varredura (tcp/udp): ").strip().lower()
-    inicio = int(input("Porta inicial: "))
-    fim = int(input("Porta final: "))
 
-    # Gera lista de hosts
+    # Gera lista de hosts a partir de IP único ou rede
     try:
         rede = ipaddress.ip_network(alvo, strict=False)
         hosts = [str(ip) for ip in rede.hosts()]
@@ -49,12 +49,15 @@ def main():
         hosts = [alvo]
 
     for host in hosts:
-        print(f"\n[+] Escaneando {host} ({tipo.upper()}) portas {inicio}-{fim}...")
-        for porta in range(inicio, fim + 1):
-            status = scan_tcp(host, porta) if tipo == "tcp" else scan_udp(host, porta)
-            print(f"  Porta {porta}/{tipo.upper()} - {status}")
+        print(f"\n[+] Escaneando {host} (TCP/UDP) nas portas comuns...")
+        for porta in PORTAS_COMUNS:
+            tcp_status = scan_tcp(host, porta)
+            udp_status = scan_udp(host, porta)
+            print(f"  Porta {porta}/TCP - {tcp_status}")
+            print(f"  Porta {porta}/UDP - {udp_status}")
 
     print("\nVarredura concluída!")
+    input("\nPressione ENTER para sair...")
 
 if __name__ == "__main__":
     main()

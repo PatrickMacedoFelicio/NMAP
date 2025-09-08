@@ -1,0 +1,31 @@
+Relatório – Scanner de Portas TCP/UDP
+---
+
+>>> Objetivo
+Desenvolver uma ferramenta capaz de realizar a varredura de portas TCP e UDP em um ou mais endereços IPA ferramenta deve indicar se as portas estão abertas, fechadas ou filtradas.
+
+---
+
+>>> Ferramenta Desenvolvida
+Implementada em Python 3, utilizando apenas bibliotecas padrão (socket, ipaddress).
+Características principais:
+- Aceita um IP único ou uma rede inteira (ex.: 192.168.0.0/24).
+- Realiza varredura automática em TCP e UDP.
+- Testa um conjunto de portas comuns.
+- Exibe estados: open, closed, filtered, open|filtered.
+
+---
+
+>>> Código-Fonte (scanner_auto.py)
+(Resumo - código completo entregue separadamente)
+- Função scan_tcp(): realiza conexão TCP simples (connect scan).
+- Função scan_udp(): envia sondagem UDP básica.
+- Resultados exibidos em tela para cada IP/porta.
+
+---
+
+>>> Como Executar 
+1. Baixe e instale Python em sua maquina: https://www.python.org/downloads/
+1. Faça o dowload do arquivo nmap.py.
+2. Clique duas vezes no arquivo baixado.
+3. Digitar o IP ou rede (ex.: 192.168.0.1 ou 192.168.0.0/24).

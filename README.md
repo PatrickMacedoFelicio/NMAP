@@ -55,7 +55,9 @@ ou, se estiver no Linux e o script for executável:
 ./nmap.py
 ```
 
-5. Digite o IP ou rede que deseja escanear:
+5. Ou caso não consiga realizar dessa maneira, basta clicar sobre o arquivo duas vezes e escolher a opção para abrir: Python
+
+6. Digite o IP ou rede que deseja escanear:
 
 ```
 Ex.: 192.168.0.1 ou 192.168.0.0/24

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import socket
 import ipaddress
 
@@ -19,8 +18,8 @@ def scan_tcp(ip, port):
     finally:
         sock.close()
 
+#Varredura UDP
 def scan_udp(ip, port):
-    """Varredura básica UDP (sondagem simples)"""
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(1)
     try:
@@ -41,7 +40,7 @@ def main():
 
     alvo = input("Digite o IP ou rede (ex: 192.168.0.1 ou 192.168.0.0/24): ").strip()
 
-    # Gera lista de hosts a partir de IP único ou rede
+# Gera lista de hosts a partir de IP único ou rede
     try:
         rede = ipaddress.ip_network(alvo, strict=False)
         hosts = [str(ip) for ip in rede.hosts()]

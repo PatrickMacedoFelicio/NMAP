@@ -5,8 +5,8 @@ import ipaddress
 # Portas mais comuns a serem testadas
 PORTAS_COMUNS = [21, 22, 23, 25, 53, 80, 110, 139, 143, 443, 445, 3389]
 
+#Varredura TCP 
 def scan_tcp(ip, port):
-    """Varredura básica TCP (connect scan)"""
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(1)
     try:

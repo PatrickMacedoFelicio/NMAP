@@ -1,16 +1,14 @@
 import socket
 import ipaddress
 
-# Portas mais comuns a serem testadas
 PORTAS_COMUNS = [21, 22, 23, 25, 53, 80, 110, 139, 143, 443, 445, 3389]
 
-#Varredura TCP 
 def scan_tcp(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(1)
     try:
         sock.connect((ip, port))
-        return "open"
+        return "open\n"
     except socket.timeout:
         return "filtered"
     except:
@@ -18,16 +16,15 @@ def scan_tcp(ip, port):
     finally:
         sock.close()
 
-#Varredura UDP
 def scan_udp(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(1)
     try:
         sock.sendto(b"teste", (ip, port))
         sock.recvfrom(1024)
-        return "open"
+        return "open\n"
     except socket.timeout:
-        return "open|filtered"
+        return "filtered"
     except:
         return "closed"
     finally:
@@ -40,7 +37,6 @@ def main():
 
     alvo = input("Digite o IP ou rede (ex: 192.168.0.1 ou 192.168.0.0/24): ").strip()
 
-# Gera lista de hosts a partir de IP único ou rede
     try:
         rede = ipaddress.ip_network(alvo, strict=False)
         hosts = [str(ip) for ip in rede.hosts()]

@@ -4,7 +4,7 @@ import ipaddress
 
 def scan_tcp(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(0)
+    sock.settimeout(1)
     try:
         sock.connect((ip, port))
         return "open"
@@ -17,7 +17,7 @@ def scan_tcp(ip, port):
 
 def scan_udp(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.settimeout(0)
+    sock.settimeout(1)
     try:
         sock.sendto(b"teste", (ip, port))
         sock.recvfrom(1024)
